@@ -1,0 +1,7 @@
+infra/.terraform
+infra/.terraform.lock.hcl
+infra/errored.tfstate
+.idea
+tls.crt
+tls.key
+keycloak/server.keystore
