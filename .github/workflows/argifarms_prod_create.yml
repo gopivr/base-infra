@@ -34,20 +34,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Terraform
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -input=false
 
-      - name: Terraform Validate
-        run: terraform validate
+      # -----------------------------
+      # DRIFT DETECTION (safe)
+      # -----------------------------
+      - name: Terraform Plan (refresh check)
+        run: terraform plan -detailed-exitcode -lock-timeout=5m
 
-      - name: Refresh State
-        run: terraform apply -refresh-only -auto-approve      
-
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan  
+      # -----------------------------
+      # APPLY (deterministic)
+      # -----------------------------
+      - name: Terraform Plan (generate)
+        run: terraform plan -out=tfplan -lock-timeout=5m
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve tfplan
