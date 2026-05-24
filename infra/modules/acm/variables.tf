@@ -24,3 +24,7 @@ variable "subject_alternative_names" {
   description = "List of SAN domains"
   type        = list(string)
 }
+variable "env" {
+  description = "The environment name, defined in environments defined as a environment."
+  type = string
+}

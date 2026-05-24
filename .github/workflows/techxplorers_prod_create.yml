@@ -1,0 +1,51 @@
+name: techx-create-infra
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: infra
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TECHX_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TECHX_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          terraform init \
+            -var='project=${{ vars.TECHX_PROD_PROJECT }}' \
+            -var='env=${{ vars.TECHX_PROD_ENV }}' \
+            -var='region=${{ vars.TECHX_PROD_REGION }}' \
+            -var='vpc_cidr=${{ vars.TECHX_PROD_VPC_CIDR }}' \
+            -var='db_username=${{ secrets.TECHX_PROD_DB_USERNAME }}' \
+            -var='db_password=${{ secrets.TECHX_PROD_DB_PASSWORD }}' \
+            -var='state_bucket_name=${{ vars.TECHX_PROD_STATE_BUCKET_NAME }}' \
+            -var='domain_name=${{ vars.TECHX_PROD_DOMAIN_NAME }}' \
+            -var='db_name=${{ vars.TECHX_PROD_DB_NAME }}' \
+            -var='repo_name=${{ vars.TECHX_PROD_REPO_NAME }}' \
+            -var='subject_alternative_names=${{ vars.TECHX_PROD_SUBJECT_ALTERNATIVE_NAMES }}'
+
+      - name: Terraform Apply
+        working-directory: infra
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TECHX_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TECHX_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          terraform apply -auto-approve \
+            -var='project=${{ vars.TECHX_PROD_PROJECT }}' \
+            -var='env=${{ vars.TECHX_PROD_ENV }}' \
+            -var='region=${{ vars.TECHX_PROD_REGION }}' \
+            -var='vpc_cidr=${{ vars.TECHX_PROD_VPC_CIDR }}' \
+            -var='db_username=${{ secrets.TECHX_PROD_DB_USERNAME }}' \
+            -var='db_password=${{ secrets.TECHX_PROD_DB_PASSWORD }}' \
+            -var='state_bucket_name=${{ vars.TECHX_PROD_STATE_BUCKET_NAME }}' \
+            -var='domain_name=${{ vars.TECHX_PROD_DOMAIN_NAME }}' \
+            -var='db_name=${{ vars.TECHX_PROD_DB_NAME }}' \
+            -var='repo_name=${{ vars.TECHX_PROD_REPO_NAME }}' \
+            -var='subject_alternative_names=${{ vars.TECHX_PROD_SUBJECT_ALTERNATIVE_NAMES }}'

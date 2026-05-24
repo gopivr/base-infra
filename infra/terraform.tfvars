@@ -1,7 +1,0 @@
-project = "doyomo"
-environment = "development"
-region = "af-south-1"
-vpc_cidr = "10.1.0.0/16"
-db_name = "doyomo"
-db_username = "doyomo"
-db_password = "password"

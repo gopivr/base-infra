@@ -8,3 +8,8 @@ variable "project" {
   description = "Project name used in resource naming and tagging"
   type        = string
 }
+
+variable "env" {
+  description = "The environment name, defined in environments defined as a environment."
+  type = string
+}

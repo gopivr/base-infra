@@ -4,8 +4,8 @@ resource "aws_vpc" "vpc"  {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "${var.project}-${terraform.workspace}-vpc"
+    Name = "${var.project}-${var.env}-vpc"
     Project = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 }

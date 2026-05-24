@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "ecr_pullthroughcache_policy" {
-  name        = "${var.project}-${terraform.workspace}-ecr-pullthrough-policy"
+  name        = "${var.project}-${var.env}-ecr-pullthrough-policy"
   description = "Policy to allow ECS task execution role to interact with ECR pull-through cache"
   policy      = jsonencode({
     Version = "2012-10-17",
@@ -18,14 +18,14 @@ resource "aws_iam_policy" "ecr_pullthroughcache_policy" {
   })
 
   tags = {
-    Name        = "${var.project}-${terraform.workspace}-ecr-pullthrough-policy"
+    Name        = "${var.project}-${var.env}-ecr-pullthrough-policy"
     Project     = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 }
 
 # resource "aws_iam_policy" "secrets_manager_policy" {
-#   name        = "${var.project}-${terraform.workspace}-secrets-manager-policy"
+#   name        = "${var.project}-${var.env}-secrets-manager-policy"
 #   description = "Policy to allow ECS task execution role to access Secrets Manager secrets"
 #   policy      = jsonencode({
 #     "Version": "2012-10-17",
@@ -44,14 +44,14 @@ resource "aws_iam_policy" "ecr_pullthroughcache_policy" {
 #   })
 
 #   tags = {
-#     Name        = "${var.project}-${terraform.workspace}-secrets-manager-policy"
+#     Name        = "${var.project}-${var.env}-secrets-manager-policy"
 #     Project     = var.project
-#     Environment = terraform.workspace
+#     Environment = var.env
 #   }
 # }
 
 # resource "aws_iam_role_policy" "app_autoscaling_policy" {
-#   name = "${var.project}-${terraform.workspace}-app-autoscaling-policy"
+#   name = "${var.project}-${var.env}-app-autoscaling-policy"
 #   role = aws_iam_role.appAutoscalingRole.id
 
 #   policy = jsonencode({

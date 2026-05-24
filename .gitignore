@@ -1,7 +1,10 @@
 infra/.terraform
 infra/.terraform.lock.hcl
 infra/errored.tfstate
+infra/terraform.tfvars
+infra/.DS_Store
 .idea
 tls.crt
 tls.key
 keycloak/server.keystore
+.DS_Store

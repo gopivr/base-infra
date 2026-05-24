@@ -18,3 +18,7 @@ variable "ssl_policy" {
   type        = string
   default     = "ELBSecurityPolicy-2016-08"
 }
+variable "env" {
+  description = "The environment name, defined in environments defined as a environment."
+  type = string
+}

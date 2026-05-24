@@ -12,3 +12,7 @@ variable "vpc_cidr" {
   description = "CIDR block of the VPC"
   type        = string
 }
+variable "env" {
+  description = "The environment name, defined in environments defined as a environment."
+  type = string
+}

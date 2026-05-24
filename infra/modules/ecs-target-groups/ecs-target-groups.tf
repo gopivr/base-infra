@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "ecs_target_group" {
-  name        = "${var.project}-${terraform.workspace}-ecs-tg"
+  name        = "${var.project}-${var.env}-ecs-tg"
   port        = 8080
   protocol    = "HTTP"
   vpc_id      = var.vpc_id
@@ -16,9 +16,9 @@ resource "aws_lb_target_group" "ecs_target_group" {
   }
 
   tags = {
-    Name        = "${var.project}.${terraform.workspace}-ecs-tg"
+    Name        = "${var.project}.${var.env}-ecs-tg"
     Project     = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 } 
 

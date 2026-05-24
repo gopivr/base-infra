@@ -1,5 +1,5 @@
 resource "aws_security_group" "vpc_endpoint_sg" {
-  name        = "${var.project}-${terraform.workspace}-vpc-endpoint-sg"
+  name        = "${var.project}-${var.env}-vpc-endpoint-sg"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -24,14 +24,14 @@ resource "aws_security_group" "vpc_endpoint_sg" {
   }
 
   tags = {
-    Name        = "${var.project}-${terraform.workspace}-vpc-endpoint-sg"
+    Name        = "${var.project}-${var.env}-vpc-endpoint-sg"
     Project     = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 }
 
 resource "aws_security_group" "ecs_cluster_sg" {
-  name        = "${var.project}-${terraform.workspace}-ecs_cluster_sg"
+  name        = "${var.project}-${var.env}-ecs_cluster_sg"
   description = "Security group for ECS cluster in private subnets"
   vpc_id      = var.vpc_id
 
@@ -52,14 +52,14 @@ resource "aws_security_group" "ecs_cluster_sg" {
   }
 
   tags = {
-    Name        = "${var.project}-${terraform.workspace}-ecs_cluster_sg"
+    Name        = "${var.project}-${var.env}-ecs_cluster_sg"
     Project     = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 }
 
 resource "aws_security_group" "alb_sg" {
-  name        = "${var.project}-${terraform.workspace}-alb-sg"
+  name        = "${var.project}-${var.env}-alb-sg"
   description = "Allow inbound traffic to ALB"
   vpc_id      = var.vpc_id
 
@@ -85,14 +85,14 @@ resource "aws_security_group" "alb_sg" {
   }
 
   tags = {
-    Name        = "${var.project}-${terraform.workspace}-alb-sg"
+    Name        = "${var.project}-${var.env}-alb-sg"
     Project     = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 }
 
   resource "aws_security_group" "rds_sg" {
-    name        = "${var.project}-${terraform.workspace}-rds-sg"
+    name        = "${var.project}-${var.env}-rds-sg"
     description = "Security group for RDS instance"
     vpc_id      = var.vpc_id
 
@@ -113,8 +113,8 @@ resource "aws_security_group" "alb_sg" {
     }
 
     tags = {
-      Name        = "${var.project}-${terraform.workspace}-rds-sg"
+      Name        = "${var.project}-${var.env}-rds-sg"
       Project     = var.project
-      Environment = terraform.workspace
+      Environment = var.env
     }
   }

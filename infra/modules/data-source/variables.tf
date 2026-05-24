@@ -8,7 +8,7 @@ variable "db_name" {
   type        = string
 }
 
-variable "public_subnet_group_name" {
+variable "private_subnet_group_name" {
   description = "Name of the DB subnet group (public or private depending on setup)"
   type        = string
 }
@@ -16,7 +16,6 @@ variable "public_subnet_group_name" {
 variable "db_username" {
   description = "Master username for RDS"
   type        = string
-  default     = "doyomo"
 }
 
 variable "db_password" {
@@ -57,4 +56,8 @@ variable "rds_sg_id" {
 variable "ecs_cluster_sg_id" {
   description = "Security group for ECS cluster"
   type        = any
+}
+variable "env" {
+  description = "The environment name, defined in environments defined as a environment."
+  type = string
 }

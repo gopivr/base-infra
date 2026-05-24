@@ -1,11 +1,11 @@
 resource "aws_secretsmanager_secret" "db_credentials" {
-  name        = "${var.project}-${terraform.workspace}-db-credentials-v1"
-  description = "Database credentials for ${var.project} in ${terraform.workspace}"
+  name        = "${var.project}-${var.env}-db-credentials-v1"
+  description = "Database credentials for ${var.project} in ${var.env}"
   recovery_window_in_days = 7
 
   tags = {
     Project     = var.project
-    Environment = terraform.workspace
+    Environment = var.env
   }
 }
 
