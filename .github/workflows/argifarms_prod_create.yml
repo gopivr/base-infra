@@ -46,6 +46,11 @@ jobs:
       - name: Terraform Plan (refresh check)
         run: terraform plan -detailed-exitcode -lock-timeout=5m
 
+      - name: Terraform import (if needed)
+        run: terraform import \
+             'module.subnets.aws_db_subnet_group.public_subnet_group' \
+              agri-prod-public-subnet-group
+
       # -----------------------------
       # APPLY (deterministic)
       # -----------------------------
