@@ -39,19 +39,6 @@ resource "aws_route_table_association" "public_subnet_route_table_association" {
   route_table_id = aws_route_table.public_subnet_route_table.id
 }
 
-resource "aws_db_subnet_group" "public_subnet_group" {
-  name       = "${var.project}-${var.env}-public-subnet-group"
-  description = "Public subnet group"
-  subnet_ids = aws_subnet.public_subnet[*].id
-
-  tags = {
-    Name        = "${var.project}-${var.env}-public-subnet-group"
-    Project     = var.project
-    Environment = var.env
-    Type        = "public"
-  }
-}
-
 resource "aws_internet_gateway" "public_igw" {
   vpc_id = var.vpc_id
 

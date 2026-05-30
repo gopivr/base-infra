@@ -9,11 +9,6 @@ output "public_route_table_id" {
   value       = aws_route_table.public_subnet_route_table.id
 }
 
-output "public_db_subnet_group_name" {
-  description = "Name of the public DB subnet group"
-  value       = aws_db_subnet_group.public_subnet_group.name
-}
-
 # Internet Gateway
 output "internet_gateway_id" {
   description = "ID of the Internet Gateway"
