@@ -9,7 +9,7 @@ resource "aws_db_instance" "postgres" {
   password                = var.db_password
   db_subnet_group_name    = var.public_subnet_group_name
   vpc_security_group_ids  = [var.rds_sg_id, var.ecs_cluster_sg_id]
-  publicly_accessible     = false
+  publicly_accessible     = true
   skip_final_snapshot     = true
   deletion_protection     = false
   final_snapshot_identifier = "${var.project}-${var.env}-database-final-snapshot"
