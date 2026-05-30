@@ -123,7 +123,7 @@ module "rds" {
   project = var.project
   env     = var.env
 
-  private_subnet_group_name = module.subnets.private_db_subnet_group_name
+  public_subnet_group_name = module.subnets.public_db_subnet_group_name
 
   rds_sg_id         = module.security_groups.rds_sg_id
   ecs_cluster_sg_id = module.security_groups.ecs_cluster_sg_id

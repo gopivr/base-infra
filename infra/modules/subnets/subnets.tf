@@ -24,6 +24,16 @@ resource "aws_route_table" "public_subnet_route_table" {
   }
 }
 
+resource "aws_internet_gateway" "public_igw" {
+  vpc_id = var.vpc_id
+
+  tags = {
+    Name        = "${var.project}-${var.env}-internet-gateway"
+    Project     = var.project
+    Environment = var.env
+  }
+}
+
 resource "aws_route" "internet_access" {
   route_table_id         = aws_route_table.public_subnet_route_table.id
   destination_cidr_block = "0.0.0.0/0"
@@ -37,16 +47,6 @@ resource "aws_route_table_association" "public_subnet_route_table_association" {
 
   subnet_id      = aws_subnet.public_subnet[count.index].id
   route_table_id = aws_route_table.public_subnet_route_table.id
-}
-
-resource "aws_internet_gateway" "public_igw" {
-  vpc_id = var.vpc_id
-
-  tags = {
-    Name        = "${var.project}-${var.env}-internet-gateway"
-    Project     = var.project
-    Environment = var.env
-  }
 }
 
 resource "aws_subnet" "private_subnet" {
@@ -91,5 +91,18 @@ resource "aws_db_subnet_group" "private_subnet_group" {
     Project     = var.project
     Environment = var.env
     Type        = "private"
+  }
+}
+
+resource "aws_db_subnet_group" "public_subnet_group" {
+  name       = "${var.project}-${var.env}-public-subnet-group"
+  description = "Public subnet group"
+  subnet_ids = aws_subnet.public_subnet[*].id
+
+  tags = {
+    Name        = "${var.project}-${var.env}-public-subnet-group"
+    Project     = var.project
+    Environment = var.env
+    Type        = "public"
   }
 }

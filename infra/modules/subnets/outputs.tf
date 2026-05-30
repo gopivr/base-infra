@@ -30,3 +30,8 @@ output "private_db_subnet_group_name" {
   description = "Name of the private DB subnet group"
   value       = aws_db_subnet_group.private_subnet_group.name
 }
+
+output "public_db_subnet_group_name" {
+  description = "Name of the public DB subnet group"
+  value       = aws_db_subnet_group.public_subnet_group.name
+}

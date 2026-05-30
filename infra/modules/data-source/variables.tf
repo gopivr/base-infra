@@ -8,7 +8,12 @@ variable "db_name" {
   type        = string
 }
 
-variable "private_subnet_group_name" {
+#variable "private_subnet_group_name" {
+#  description = "Name of the DB subnet group (public or private depending on setup)"
+#  type        = string
+#}
+
+variable "public_subnet_group_name" {
   description = "Name of the DB subnet group (public or private depending on setup)"
   type        = string
 }
